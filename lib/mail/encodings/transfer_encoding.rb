@@ -46,7 +46,7 @@ module Mail
       def self.renegotiate(message_encoding, source_encoding, str, allowed_encodings = nil)
         encodings = Encodings.get_all.select do |enc|
           (allowed_encodings.nil? || allowed_encodings.include?(enc)) &&
-            message_encoding.can_transport?(enc) &&
+            message_encoding&.can_transport?(enc) &&
             enc.can_encode?(source_encoding)
         end
 
